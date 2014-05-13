@@ -15,6 +15,7 @@
  */
 
 #include <openssl/evp.h>
+#include "pppd.h"
 
 const EVP_MD *sha1_md;
 const EVP_MD *md4_md;
