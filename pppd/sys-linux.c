@@ -2146,6 +2146,8 @@ int ppp_available(void)
 void logwtmp (const char *line, const char *name, const char *host)
 {
     struct utmp ut, *utp;
+    struct utmp *getutent(void);
+    struct utmp *pututline(struct utmp *ut);
     pid_t  mypid = getpid();
 #if __GLIBC__ < 2
     int    wtmp;
@@ -2156,7 +2158,7 @@ void logwtmp (const char *line, const char *name, const char *host)
  * Christoph Lameter: Copied from poeigl-1.36 Jan 3, 1996
  */
     utmpname(_PATH_UTMP);
-    setutent();
+    void setutent(void);
     while ((utp = getutent()) && (utp->ut_pid != mypid))
 	/* nothing */;
 
@@ -2191,7 +2193,7 @@ void logwtmp (const char *line, const char *name, const char *host)
 	ut.ut_host[0]=0;
 
     pututline(&ut);
-    endutent();
+    void endutent(void);
 /*
  * Update the wtmp file.
  */
